@@ -1,22 +1,27 @@
-// server.js
-// where your node app starts
-
-// init project
+// include dependencies
 var express = require('express');
+var proxy = require('http-proxy-middleware');
+
+// proxy middleware options
+var options = {
+        target: 'http://www.example.org', // target host
+        changeOrigin: true,               // needed for virtual hosted sites
+        ws: true,                         // proxy websockets
+        pathRewrite: {
+            '^/live' : '/live',     // rewrite path
+            '^/' : '/'           // remove base path
+        },
+        router: {
+            // when request.headers.host == 'dev.localhost:3000',
+            // override target 'http://www.example.org' to 'http://localhost:8000'
+            'dev.localhost:3000' : 'http://localhost:8000'
+        }
+    };
+
+// create the proxy (without context)
+var exampleProxy = proxy(options);
+
+// mount `exampleProxy` in web server
 var app = express();
-
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
-
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
-});
-
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+    app.use('/api', exampleProxy);
+    app.listen(3000);
