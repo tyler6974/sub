@@ -10,7 +10,7 @@ var options = {
         router: {
             // when request.headers.host == 'dev.localhost:3000',
             // override target 'http://www.example.org' to 'http://localhost:8000'
-            'dev.localhost:3000' : 'http://localhost:8000'
+            '/' : 'https://znw-web.glitch.me'
         }
     };
 
