@@ -4,13 +4,9 @@ var proxy = require('http-proxy-middleware');
 
 // proxy middleware options
 var options = {
-        target: 'http://www.example.org', // target host
+        target: 'https://znw-web.glitch.me', // target host
         changeOrigin: true,               // needed for virtual hosted sites
         ws: true,                         // proxy websockets
-        pathRewrite: {
-            '^/live' : '/live',     // rewrite path
-            '^/' : '/'           // remove base path
-        },
         router: {
             // when request.headers.host == 'dev.localhost:3000',
             // override target 'http://www.example.org' to 'http://localhost:8000'
@@ -23,5 +19,5 @@ var exampleProxy = proxy(options);
 
 // mount `exampleProxy` in web server
 var app = express();
-    app.use('/api', exampleProxy);
+    app.use('/', exampleProxy);
     app.listen(3000);
