@@ -1,7 +1,7 @@
 // include dependencies
 var express = require('express');
 var proxy = require('http-proxy-middleware');
-
+let cache = require('apicache');
 
 
 // proxy middleware options
