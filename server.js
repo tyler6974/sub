@@ -6,7 +6,7 @@ let cache = require('apicache');
 
 // proxy middleware options
 var options = {
-        target: 'https://classic.minecraft.net', // target host
+        target: 'https://classic.minecraft.net', // target
         changeOrigin: true,               // needed for virtual hosted sites
         ws: true                    // proxy websockets
     };
