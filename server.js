@@ -6,7 +6,7 @@ let cache = require('apicache');
 
 // proxy middleware options
 var options = {
-        target: 'https://html5.gamemonetize.com/z917gguqhaxftwwd0ivysirphq4o2152/', // target
+        target: 'https://html5.gamemonetize.com/2nar7qp7ooku6khswx07bji096e7micp/', // target
         changeOrigin: true,               // needed for virtual hosted sites
         ws: true                    // proxy websockets
     };
